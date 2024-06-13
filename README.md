@@ -183,6 +183,27 @@ protected $sortFields = [
 ];
 ```
 any field other than email, mobile, or posts will be rejected when filtering.
+
+Referencing a relationship in the sortField array is similar except it requires one extra step. For example, we have the below sortField in model User. We want to be able to sort the field 'title' in the model Post: 
+```php
+// App\Models\User
+
+protected $sortFields = [
+  'name',
+  'mobile',
+  'posts', // relation with model Post
+
+];
+```
+In model Post, the field you want to be sortable needs to be added to the model's own sortField:
+```php
+// App\Models\Post
+
+protected $sortFields = [
+  'title',
+];
+
+```
 #### Overwrite Allowed Fields
 to overwrite allowed fields in the controller add `filterFields` or `sortFields` before calling filter or sort method.
 ```php
